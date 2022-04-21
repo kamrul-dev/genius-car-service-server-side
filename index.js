@@ -26,7 +26,7 @@ async function run() {
             const cursor = serviceCollection.find(query);
             const services = await cursor.toArray();
             res.send(services);
-        })
+        });
 
         // Load single service by using service id from mongodb database using get api
         app.get('/service/:id', async (req, res) => {
@@ -34,6 +34,14 @@ async function run() {
             const query = { _id: ObjectId(id) };
             const service = await serviceCollection.findOne(query);
             res.send(service);
+        });
+
+        // post data client side to mongodb
+        app.post('/service', async (req, res) => {
+            const newService = req.body;
+            const result = await serviceCollection.insertOne(newService);
+            res.send(result);
+
         })
 
     }
