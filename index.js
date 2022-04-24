@@ -19,6 +19,7 @@ async function run() {
     try {
         await client.connect();
         const serviceCollection = client.db('geniusCar').collection('service');
+        const orderColletion = client.db('geniusCar').collection('service')
 
         // Load the data from mongodb database to client site using get api
         app.get('/service', async (req, res) => {
@@ -51,6 +52,13 @@ async function run() {
             const result = await serviceCollection.deleteOne(query);
             res.send(result);
 
+        });
+
+        // order collection
+        app.post('/order', async (req, res) => {
+            const order = req.body;
+            const result = await orderColletion.insertOne(order);
+            res.send(result);
         })
 
     }
