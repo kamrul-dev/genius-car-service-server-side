@@ -90,8 +90,8 @@ async function run() {
                 const orders = await cursor.toArray();
                 res.send(orders);
             }
-            else{
-                res.status(403).send({message: 'forbidden access'})
+            else {
+                res.status(403).send({ message: 'forbidden access' })
             }
         })
 
@@ -113,6 +113,11 @@ run().catch(console.dir);
 app.get('/', (req, res) => {
     res.send('Running Genius Server');
 });
+
+app.get('/heroku', (req, res) => {
+    res.send('heroku is running for geniusCar');
+})
+
 
 app.listen(port, () => {
     console.log("listening port:", port);
